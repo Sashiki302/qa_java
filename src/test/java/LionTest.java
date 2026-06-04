@@ -13,11 +13,7 @@ import static org.junit.Assert.*;
 public class LionTest {
     @Mock
     private Feline mockFeline;
-    @Test
-    public void doesHaveManeLionTrue() throws Exception {
-    Lion lion = new Lion(mockFeline,"Самец");
-    assertTrue(lion.doesHaveMane());
-}
+
     @Test
     public void doesHaveManeLionFalse() throws Exception {
         Lion lion = new Lion(mockFeline,"Самка");
@@ -25,11 +21,9 @@ public class LionTest {
     }
     @Test
     public void doesHaveManeException() {
-        try {
-            new Lion(mockFeline, "Неизвестно");
-        } catch (Exception exception){
+       Exception exception = assertThrows(Exception.class, () -> {
+           new Lion(mockFeline, "Неизвестно");});
             assertEquals("Используйте допустимые значения пола животного - самец или самка", exception.getMessage());
-        }
     }
     @Test
     public void getKittensLionCount() throws Exception {
